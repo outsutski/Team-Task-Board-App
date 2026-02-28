@@ -1,20 +1,19 @@
-// import express from 'express'
-// import jwt from 'jsonwebtoken'
+import express from "express";
+import bcrypt from 'bcrypt'
+import User from '../models/User.js'
 
-// const app = express()
-
-// app.use(express.json())
+const router = express.Router()
 
 
-app.get('/login', (req, res) => {
+router.get('/login', (req, res) => {
     res.render('pages/login.ejs');
 })
 
-app.get('/register', (req, res) => {
+router.get('/register', (req, res) => {
     res.render('pages/register.ejs')
 })
 
-app.post('/register', async (req, res) => {
+router.post('/register', async (req, res) => {
     try{
         const { username, email, password, confirm_password } = req.body
 
@@ -31,9 +30,16 @@ app.post('/register', async (req, res) => {
             password: hashedPassword
         })
 
+        const existing = await User.findOne({
+            $or: [{ email }, { username }]
+            })
+            if (existing) {
+            return res.status(400).send('Email or username already in use.')
+            }
+
+
         await newUser.save();
         res.send("Registration successful! You can now log in.")
-        console.log(hashedPassword)
 
     } catch(err){
         console.error(err)
@@ -42,3 +48,4 @@ app.post('/register', async (req, res) => {
 })
 
 
+export default router

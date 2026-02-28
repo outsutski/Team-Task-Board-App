@@ -11,9 +11,13 @@ const UserSchema = new mongoose.Schema({
         required: true,
         unique: true
     },
-    hashedPassword: {
+    password: {
         type: String,
         required: true
+    },
+    created_at: {
+        type: Date,
+        default: Date.now
     },
 })
 

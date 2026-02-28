@@ -2,7 +2,13 @@ import mongoose from "mongoose"
 
 const BoardSchema = new mongoose.Schema({
     name: {
-        team_id: String,
+        type: String,
+        required: true,
+        trim: true
+        },
+    team_id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Team',
         required: true
     },
     title: {
@@ -13,6 +19,10 @@ const BoardSchema = new mongoose.Schema({
         type: String,
         default: 'public',
         enum: ['public', 'team', 'private']
+    },
+    created_at: {
+        type: Date,
+        default: Date.now
     },
 })
 

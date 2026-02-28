@@ -2,7 +2,8 @@ import mongoose from "mongoose"
 
 const TaskSchema = new mongoose.Schema({
     list_id: {
-        type: String,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'List',
         required: true
     },
     title: {
@@ -20,6 +21,10 @@ const TaskSchema = new mongoose.Schema({
     due_date: {
         type: Date,
         required: false
+    },
+    created_at: {
+        type: Date,
+        default: Date.now
     },
 })
 
