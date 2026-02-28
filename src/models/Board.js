@@ -1,24 +1,23 @@
 import mongoose from "mongoose"
 
 const BoardSchema = new mongoose.Schema({
-    name: {
-        type: String,
-        required: true,
-        trim: true
-        },
-    team_id: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Team',
-        required: true
-    },
     title: {
         type: String,
         required: true
     },
+    ownerId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
+    },
+    memberIds: [
+        { type: mongoose.Schema.Types.ObjectId,
+        ref: 'User' }
+    ],
     visibility: {
         type: String,
         default: 'public',
-        enum: ['public', 'team', 'private']
+        enum: ['public', 'private']
     },
     created_at: {
         type: Date,

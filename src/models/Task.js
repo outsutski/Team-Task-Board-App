@@ -1,26 +1,29 @@
 import mongoose from "mongoose"
 
 const TaskSchema = new mongoose.Schema({
-    list_id: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'List',
-        required: true
-    },
     title: {
         type: String,
         required: true
     },
-    description: {
-        type: String,
+    completed: {
+        type: Boolean,
+        default: false
+    },
+    boardId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Board',
         required: true
     },
-    assignee_id: {
-        type: String,
+    createdBy: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
         required: true
+    },
+    description: {
+        type: String,
     },
     due_date: {
         type: Date,
-        required: false
     },
     created_at: {
         type: Date,
