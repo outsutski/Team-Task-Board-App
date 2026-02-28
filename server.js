@@ -3,7 +3,7 @@ import connectDB from './config/db.js'
 import ejs from 'ejs'
 import morgan from 'morgan'
 import authRoutes from './routes/auth.js'
-import { protect } from './middleware/auth.js'
+import { protect } from './src/middleware/auth.js'
 
 
 const PORT = process.env.PORT || 5000
@@ -24,7 +24,7 @@ app.get('/', (req, res) => {
 })
 
 app.get('/dashboard', (req, res) => {
-    res.render('pages/dashboard.ejs')
+    res.send('<h1> Dashboard </h1>')
 })
 
 // app.get('/dashboard', protect, (req, res) => { ... })
