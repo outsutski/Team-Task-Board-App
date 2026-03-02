@@ -7,12 +7,12 @@ export const createBoard = async (req, res, next) => {
 
         const board = await Board.create({
             title,
-            ownerId: req.user.userId,       // ← comes from the JWT via protect middleware
-            memberIds: [req.user.userId]    // ← owner is automatically a member
+            ownerId: req.user.userId,    
+            memberIds: [req.user.userId]   
         })
 
         res.status(201).json(board)
     } catch (err) {
-        next(err)  // ← pass to centralized error handler, don't inline it
+        next(err) 
     }
 }

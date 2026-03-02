@@ -1,4 +1,3 @@
-// src/routes/boards.js
 import express from 'express'
 import { createBoard } from '../controllers/boardController.js'
 import { protect } from '../middleware/auth.js'

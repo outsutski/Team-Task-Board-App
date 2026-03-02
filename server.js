@@ -2,6 +2,7 @@ import express from 'express'
 import connectDB from './config/db.js'
 import morgan from 'morgan'
 import authRoutes from './src/routes/auth.js'
+import boardRoutes from './src/routes/boards.js'
 import { protect } from './src/middleware/auth.js'
 
 
@@ -14,7 +15,11 @@ app.use(express.static('public'))
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 app.use(morgan('dev'))
+
+
 app.use('/', authRoutes) 
+app.use('/boards', boardRoutes)
+
 
 
 app.get('/', (req, res) => {
