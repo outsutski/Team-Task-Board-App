@@ -40,22 +40,22 @@ router.post('/login', async (req, res) => {
 
 
 router.get('/register', (req, res) => {
-    res.render('pages/register.ejs')
+    res.send('<h1>Register</h1>')
 })
 
 router.post('/register', async (req, res) => {
     try{
-        const { username, email, password, confirm_password } = req.body
+        const { username, email, password} = req.body
 
         if (password !== confirm_password) {
-            return res.send("Passwords do not match.");
+            return res.json({ error: "Passwords do not match." })
         }
 
         const existing = await User.findOne({
             $or: [{ email }, { username }]
             })
             if (existing) {
-            return res.status(400).send('Email or username already in use.')
+            return res.status(400).jsom({ error: 'Email or username already in use.' })
             }
 
         const hashedPassword = await bcrypt.hash(password, 10)
@@ -72,7 +72,7 @@ router.post('/register', async (req, res) => {
 
     } catch(err){
         console.error(err)
-        res.status(500).send("An error occurred during registration.")
+        res.status(500).json({ error: "Server error" })
     }
 })
 
