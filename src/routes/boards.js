@@ -1,49 +1,24 @@
 import express from 'express'
-import { createBoard } from '../controllers/boardController.js'
+import { createBoard, getBoards } from '../controllers/boardController.js'
 import { protect } from '../middleware/auth.js'
 
 const router = express.Router()
 router.use(protect)
 router.use(express.json())
 
-// GET /boards
-router.get('/', (req, res) => {
-    const boardId = req.params.id
-    res.status(200).send('data')
-})
 
-
+router.get('/', getBoards)
 router.post('/', createBoard)
 
 // POST /boards/:id/invite
-router.post('/:id/invite', (req, res) => {
-    const boardId = req.params.id 
-    const { email } = req.body
-
-    res.status(200).json({ message: `Invited ${email} to board ${boardId}` });
-})
+router.post('/:id/invite', createInvite)  
 
 // POST /boards/:id/tasks
-router.post('/:id/tasks', (req, res) => {
-    const boardId = req.params.id
-    const taskData = req.body
-
-    res.status(201).json({
-        message: `Task created for board ${boardId}`,
-        data: taskData
-    })
-})
+router.post('/:id/tasks', createTask)
 
 // GET /boards/:id/tasks
-router.get('/:id/tasks', async (req, res) => {
-    const boardId = req.params.id
+router.get('/:id/tasks', readBoard)
 
-    const tasks = await Task.find({ boardId: boardId });
-
-    res.status(200).json({
-        message: `Fetched tasks for board ${boardId}`,
-    })
-})
 
 
 

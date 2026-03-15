@@ -3,6 +3,7 @@ import connectDB from './config/db.js'
 import morgan from 'morgan'
 import authRoutes from './src/routes/auth.js'
 import boardRoutes from './src/routes/boards.js'
+import taskRoutes from './src/routes/tasks.js'
 import { protect } from './src/middleware/auth.js'
 
 
@@ -19,6 +20,7 @@ app.use(morgan('dev'))
 
 app.use('/', authRoutes) 
 app.use('/boards', boardRoutes)
+app.use('/tasks', taskRoutes)
 
 
 

@@ -32,11 +32,8 @@ const loginUser = async (req, res) => {
 
 const registerUser = async (req, res) => {
     try{
-        const { username, email, password, confirm_password} = req.body
+        const { username, email, password} = req.body
 
-        if (password !== confirm_password) {
-            return res.json({ error: "Passwords do not match." })
-        }
 
         const existing = await User.findOne({
             $or: [{ email }, { username }]

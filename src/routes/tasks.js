@@ -6,7 +6,7 @@ const router = express.Router()
 router.use(protect)
 
 // PATCH /tasks/:id
-router.patch('/', updateTask)
+router.patch('/:id', updateTask)
 
 // DELETE /tasks/:id
-router.delete('/', deleteTask)
+router.delete('/:id', deleteTask)
