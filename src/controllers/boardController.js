@@ -30,6 +30,10 @@ const createInvite = async (req, res) => {
      if (ownerId === req.user.userId){
         const { email } = req.body
         const user = await User.findOne({ email })
+        await Board.findByIdAndUpdate(
+            boardId,
+            { $push: { memberIds: userToInvite._id } }
+            )
      }else {
 
      }
@@ -40,7 +44,7 @@ const createInvite = async (req, res) => {
 const createTask = (req, res) => {
     const boardId = req.params.id
     const taskData = req.body
-
+    
     res.status(201).json({
         message: `Task created for board ${boardId}`,
         data: taskData
