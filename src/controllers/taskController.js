@@ -1,4 +1,5 @@
 import Task from '../models/Task.js'
+import Board from '../models/Board.js'
 
 const updateTask = async (req, res, next) => {
     try {
