@@ -10,3 +10,6 @@ router.patch('/:id', updateTask)
 
 // DELETE /tasks/:id
 router.delete('/:id', deleteTask)
+
+
+export default router

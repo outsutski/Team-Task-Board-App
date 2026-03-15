@@ -1,10 +1,9 @@
 import express from 'express'
-import { createBoard, getBoards } from '../controllers/boardController.js'
+import { createBoard, getBoards, createInvite, createTask, readBoard } from '../controllers/boardController.js'
 import { protect } from '../middleware/auth.js'
 
 const router = express.Router()
 router.use(protect)
-router.use(express.json())
 
 
 router.get('/', getBoards)

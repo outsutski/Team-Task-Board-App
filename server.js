@@ -24,14 +24,11 @@ app.use('/tasks', taskRoutes)
 
 
 
-app.get('/', (req, res) => {
-    res.send('<h1> homepage </h1>')
+app.use((err, req, res, next) => {
+    console.error(err)
+    res.status(err.status || 500).json({ error: err.message || 'Server error' })
 })
 
-
-app.get('/dashboard', protect, (req, res) => {
-    res.send('<h1> Dashboard </h1>')
-  })
 
 app.listen(PORT, () => {
     console.log(`server running on port ${PORT}`)

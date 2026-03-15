@@ -26,7 +26,7 @@ const loginUser = async (req, res) => {
 
     }catch(err){
         console.error(err)
-        res.status(500).send("An error occurred during login.")
+        res.status(500).json({ error: "Server error" })
     }
 }
 
@@ -60,4 +60,4 @@ const registerUser = async (req, res) => {
     }
 }
 
-export default {registerUser, loginUser}
+export { registerUser, loginUser }
